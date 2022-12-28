@@ -1,7 +1,22 @@
-body {
-  background-color: darkgreen;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-h1 {
-  color: pink;
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+header {
+    display: flex;
+}
+
+header > button {
+    margin-left: auto;
+}
+
+#google {
+    visibility: hidden;
 }
