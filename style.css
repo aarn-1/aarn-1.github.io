@@ -16,7 +16,6 @@ body{
 
 header, footer {
     flex: none;
-    border: 1px solid black;
 }
 
 
@@ -24,7 +23,6 @@ canvas {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     flex: auto;
-    border: 1px solid red;
 }
 
 header {
