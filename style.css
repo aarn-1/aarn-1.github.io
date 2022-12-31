@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,14 +9,28 @@ html, body {
     height: 100%;
 }
 
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer {
+    flex: none;
+    border: 1px solid black;
+}
+
+
+canvas {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    flex: auto;
+    border: 1px solid red;
+}
+
 header {
     display: flex;
 }
 
 header > button {
     margin-left: auto;
-}
-
-#google {
-    visibility: hidden;
 }

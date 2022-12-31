@@ -1,3 +1,7 @@
+
+
+
+
 function fireLaser() {
     const laser = new Audio('laser.mp3');
     laser.play().then(() => null);
