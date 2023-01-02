@@ -12,13 +12,17 @@
 <body>
 <header>
     <h1>Game title</h1>
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+    <button id="start" class="btn btn-success" type="button" onclick="startGame()">
+        START
+    </button>
+    <button id="settings" class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
             aria-controls="offcanvasRight" onclick="getLocation()">
         Settings
     </button>
 </header>
 
-    <canvas id="myCanvas"></canvas>
+<canvas id="myCanvas"></canvas>
 
 <footer>Footer</footer>
 
@@ -28,8 +32,10 @@
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        Your location: <p id="location"></p>
+        Your location: <p id="location"></p><br>
+        Dark-mode:
     </div>
+
 </div>
 
 <script src="script.js"></script>
