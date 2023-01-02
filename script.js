@@ -1,10 +1,11 @@
 let character;
-let obstacles = [];
+let obstacles;
 let running = false;
 
 function startGame() {
     if (!running) {
         running = true;
+        obstacles = [];
         initGame();
     }
 }
