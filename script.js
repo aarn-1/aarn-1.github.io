@@ -164,3 +164,5 @@ function getLocation() {
         x.innerHTML = 'Geolocation is not supported by this browser.';
     }
 }
+
+document.getElementById("year").innerHTML = new Date().getFullYear().toString();
