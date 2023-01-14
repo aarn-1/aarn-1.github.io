@@ -12,21 +12,21 @@ function startGame() {
 
 function initGame() {
     character = new Component(10, 10, "red", 40, 40);
-    gameArea.start();
+    field.start();
 }
 
-const gameArea = {
+const field = {
     canvas: document.getElementById("myCanvas"),
     start: function () {
         this.context = this.canvas.getContext("2d");
         this.frameNo = 0;
-        this.interval = setInterval(updateGameArea, 20);
+        this.interval = setInterval(updateField, 20);
         window.addEventListener('keydown', function (e) {
-            gameArea.keys = (gameArea.keys || []);
-            gameArea.keys[e.key] = (e.type === "keydown");
+            field.keys = (field.keys || []);
+            field.keys[e.key] = (e.type === "keydown");
         })
         window.addEventListener('keyup', function (e) {
-            gameArea.keys[e.key] = false;
+            field.keys[e.key] = false;
         })
     },
     clear: function () {
@@ -46,7 +46,7 @@ function Component(width, height, color, x, y) {
     this.x = x;
     this.y = y;
     this.update = function () {
-        let ctx = gameArea.context;
+        let ctx = field.context;
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
@@ -71,23 +71,24 @@ function Component(width, height, color, x, y) {
     }
 }
 
-function updateGameArea() {
+function updateField() {
     for (let i = 0; i < obstacles.length; i++) {
         if (character.crashWith(obstacles[i])) {
-            gameArea.stop();
+            field.stop();
+            fireLaser();
             return;
         }
     }
-    gameArea.clear();
+    field.clear();
 
-    gameArea.frameNo += 1;
-    if (gameArea.frameNo === 1 || everyInterval(75)) {
-        let x = gameArea.canvas.width;
+    field.frameNo += 1;
+    if (field.frameNo === 1 || everyInterval(75)) {
+        let x = field.canvas.width;
         let minHeight = 0;
-        let maxHeight = gameArea.canvas.height * 0.8;
+        let maxHeight = field.canvas.height * 0.8;
         let height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
-        let minGap = gameArea.canvas.height * 0.2;
-        let maxGap = gameArea.canvas.height * 0.4;
+        let minGap = field.canvas.height * 0.2;
+        let maxGap = field.canvas.height * 0.4;
         let gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
         obstacles.push(new Component(10, height, "green", x, 0));
         obstacles.push(new Component(10, x - height - gap, "green", x, height + gap));
@@ -99,16 +100,16 @@ function updateGameArea() {
 
     character.speedX = 0;
     character.speedY = 0;
-    if (gameArea.keys && gameArea.keys['ArrowLeft']) {
+    if (field.keys && field.keys['ArrowLeft']) {
         moveLeft();
     }
-    if (gameArea.keys && gameArea.keys['ArrowRight']) {
+    if (field.keys && field.keys['ArrowRight']) {
         moveRight();
     }
-    if (gameArea.keys && gameArea.keys['ArrowUp']) {
+    if (field.keys && field.keys['ArrowUp']) {
         moveUp();
     }
-    if (gameArea.keys && gameArea.keys['ArrowDown']) {
+    if (field.keys && field.keys['ArrowDown']) {
         moveDown();
     }
 
@@ -117,17 +118,17 @@ function updateGameArea() {
 
 }
 
-// true if gameArea.frameNo is a multiple of n
+// true if field.frameNo is a multiple of n
 function everyInterval(n) {
-    return (gameArea.frameNo / n) % 1 === 0;
+    return (field.frameNo / n) % 1 === 0;
 }
 
 function moveUp() {
-    character.speedY -= 1;
+    if (character.y > 0) character.speedY -= 1;
 }
 
 function moveDown() {
-    character.speedY += 1;
+    if (character.y < field.canvas.height - character.height) character.speedY += 1;
 }
 
 function moveLeft() {
@@ -137,12 +138,6 @@ function moveLeft() {
 function moveRight() {
     character.speedX += 2;
 }
-
-function stopMove() {
-    character.speedX = 0;
-    character.speedY = 0;
-}
-
 
 function fireLaser() {
     const laser = new Audio('laser.mp3');
@@ -166,3 +161,12 @@ function getLocation() {
 }
 
 document.getElementById("year").innerHTML = new Date().getFullYear().toString();
+function toggleBackground() {
+    let c = document.getElementById("myCanvas").style.backgroundColor;
+    if(c === "black") {
+        document.getElementById("myCanvas").style.backgroundColor = "white";
+    }
+    else {
+        document.getElementById("myCanvas").style.backgroundColor = "black";
+    }
+}

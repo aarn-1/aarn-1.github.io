@@ -25,6 +25,8 @@ canvas {
     -webkit-overflow-scrolling: touch;
     flex: auto;
     background-color: black;
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
 }
 
 header {
