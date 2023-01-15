@@ -136,7 +136,7 @@ function moveLeft() {
 }
 
 function moveRight() {
-    character.speedX += 2;
+    if (character.x + character.width < field.canvas.width) character.speedX += 2;
 }
 
 function fireLaser() {
@@ -160,7 +160,6 @@ function getLocation() {
     }
 }
 
-document.getElementById("year").innerHTML = new Date().getFullYear().toString();
 function toggleBackground() {
     let c = document.getElementById("myCanvas").style.backgroundColor;
     if(c === "black") {
@@ -170,3 +169,5 @@ function toggleBackground() {
         document.getElementById("myCanvas").style.backgroundColor = "black";
     }
 }
+
+document.getElementById("year").innerHTML = new Date().getFullYear().toString();
